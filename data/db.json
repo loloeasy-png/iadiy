@@ -1,0 +1,69 @@
+{
+  "orders": [
+    {
+      "internalRef": "bf66ca9e507b40085906",
+      "revolutOrderId": "69e4e7f4-c83e-a657-b3e2-aee745db0daf",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/29f8eb19-4e11-4a66-b21d-85543647e735",
+      "status": "pending",
+      "createdAt": "2026-04-19T14:34:28.737Z"
+    },
+    {
+      "internalRef": "acb0e9ccd901182600c1",
+      "revolutOrderId": "69e53282-a86d-acab-b9d3-882572f17cfd",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/db88e12c-4117-4e5d-8560-0cc7571a6a68",
+      "status": "pending",
+      "createdAt": "2026-04-19T19:52:34.559Z"
+    },
+    {
+      "internalRef": "ca4caba6d1d9c1bee551",
+      "revolutOrderId": "69e5330f-fcb4-a2ff-b32e-30e39061f839",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/737e3ff0-d2de-4dca-b107-0f60e4e98156",
+      "status": "pending",
+      "createdAt": "2026-04-19T19:54:55.280Z"
+    },
+    {
+      "internalRef": "473a8bae628ceba87f07",
+      "revolutOrderId": "69e535cc-a78b-aa80-8eae-699ed6760913",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/27d6288d-7ba2-40e5-b34c-52c6f4b2d917",
+      "status": "pending",
+      "createdAt": "2026-04-19T20:06:36.559Z"
+    },
+    {
+      "internalRef": "a617ccf276d043f9d15d",
+      "revolutOrderId": "69e53630-a9cf-a550-89a0-4acb5f8c9b0d",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/b0e76d23-e986-46fa-9463-d9c55e251d2c",
+      "status": "pending",
+      "createdAt": "2026-04-19T20:08:16.590Z"
+    },
+    {
+      "internalRef": "21b40a3938ee98d421c2",
+      "revolutOrderId": "69e5b515-3eb5-add0-a4f6-69850c489144",
+      "publicId": null,
+      "checkoutUrl": "https://checkout.revolut.com/payment-link/db41f45c-e6df-470f-82df-f1b2d09eedee",
+      "status": "pending",
+      "createdAt": "2026-04-20T05:09:41.358Z"
+    }
+  ],
+  "accesses": [
+    {
+      "token": "test123",
+      "status": "active",
+      "expiresAt": "2026-04-19T21:40:35.957Z"
+    },
+    {
+      "token": "test123",
+      "status": "active",
+      "expiresAt": "2026-04-19T21:48:10.845Z"
+    },
+    {
+      "token": "test123",
+      "status": "active",
+      "expiresAt": "2026-04-19T21:48:11.937Z"
+    }
+  ]
+}

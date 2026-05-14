@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accès IADI</title>
+<style>
+  body {
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+      radial-gradient(circle at 10% 14%, rgba(31,111,213,.14), transparent 16%),
+      radial-gradient(circle at 88% 12%, rgba(255,179,0,.16), transparent 18%),
+      linear-gradient(180deg, #eef2f7 0%, #fafcff 100%);
+    color:#18314f;
+  }
+  .wrap {
+    width:min(1180px, calc(100% - 28px));
+    margin:0 auto;
+    padding:24px 0 40px;
+  }
+  .card {
+    background:#fff;
+    border-radius:28px;
+    box-shadow:0 24px 50px rgba(18,42,94,.12);
+    border:1px solid rgba(17,24,39,.05);
+    overflow:hidden;
+  }
+  .top {
+    padding:22px 24px;
+    border-bottom:1px solid rgba(17,24,39,.06);
+  }
+  h1 { margin:0 0 8px; font-size:34px; }
+  p { margin:0; color:#5f7087; }
+  #state {
+    padding:18px 24px;
+    font-weight:800;
+  }
+  #chat-shell {
+    display:none;
+    height: calc(100vh - 240px);
+    min-height:620px;
+    padding:0;
+  }
+  #bp-embedded-webchat {
+    width:100%;
+    height:100%;
+  }
+  .error {
+    color:#a12c22;
+    background:#fff4f2;
+    border:1px solid rgba(239,59,45,.18);
+    border-radius:18px;
+    padding:16px 18px;
+    margin:18px 24px 24px;
+    font-weight:700;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <h1>Accès IADI</h1>
+        <p>Cette page vérifie le paiement côté serveur avant d’afficher le chatbot.</p>
+      </div>
+      <div id="state">Vérification de votre accès…</div>
+      <div id="errorBox" class="error" style="display:none;"></div>
+      <div id="chat-shell">
+        <div id="bp-embedded-webchat"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('token')
+  const orderRef = params.get('order_ref')
+
+  const state = document.getElementById('state')
+  const chatShell = document.getElementById('chat-shell')
+  const errorBox = document.getElementById('errorBox')
+
+  function fail(message) {
+    state.style.display = 'none'
+    errorBox.style.display = 'block'
+    errorBox.textContent = message
+  }
+
+  async function start() {
+    try {
+      const url = token
+        ? `/api/verify-access?token=${encodeURIComponent(token)}`
+        : `/api/verify-access?order_ref=${encodeURIComponent(orderRef || '')}`
+
+      const response = await fetch(url)
+      const data = await response.json()
+
+      if (!response.ok || !data.ok || !data.token) {
+        throw new Error('Accès invalide ou expiré. Le paiement doit être validé et l’accès est limité à 24h.')
+      }
+
+      const clean = new URL(window.location.href)
+      clean.searchParams.set('token', data.token)
+      clean.searchParams.delete('order_ref')
+      history.replaceState({}, '', clean.toString())
+
+      state.textContent = `Accès validé jusqu’au ${new Date(data.expiresAt).toLocaleString('fr-FR')}`
+
+      const inject = document.createElement('script')
+      inject.src = 'https://cdn.botpress.cloud/webchat/v3.6/inject.js'
+      inject.onload = () => {
+        const botpressScript = document.createElement('script')
+        botpressScript.src = 'https://files.bpcontent.cloud/2026/04/12/15/20260412152259-AS5AW7DG.js'
+        botpressScript.defer = true
+        document.body.appendChild(botpressScript)
+        chatShell.style.display = 'block'
+
+        window.botpress.on('webchat:ready', () => {
+          setTimeout(() => {
+            window.botpress.sendMessage('bonjour')
+          }, 800)
+        })
+      }
+
+      document.body.appendChild(inject)
+    } catch (error) {
+      fail(error.message || 'Impossible de vérifier votre accès.')
+    }
+  }
+
+  start()
+</script>
