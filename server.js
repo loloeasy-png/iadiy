@@ -303,7 +303,7 @@ app.get('/dev-access', (req, res) => {
 
   saveDb(db)
 
-  res.send(`Accès créé : http://localhost:3000/acces-iadi?token=${token}`)
+  res.send(`Accès créé : <a href="${APP_BASE_URL}/acces-iadi?token=${access.token}">${APP_BASE_URL}/acces-iadi?token=${access.token}</a>`)
 })
 
 app.listen(PORT, () => {
