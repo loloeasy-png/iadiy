@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accès IADIY – Ton assistant vitrage</title>
+  <title>Accès IADIY – Ton expert bricolage IA</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -77,7 +77,7 @@
       padding: 36px 0 52px;
     }
 
-    /* ── STATES: loading / error / success ───────────────── */
+    /* ── STATES ───────────────────────────────────────────── */
     .state-card {
       background: #fff;
       border-radius: var(--radius);
@@ -95,27 +95,10 @@
       to   { opacity:1; transform:translateY(0); }
     }
 
-    .state-icon {
-      font-size: 54px;
-      margin-bottom: 18px;
-      display: block;
-    }
+    .state-icon { font-size: 54px; margin-bottom: 18px; display: block; }
+    .state-card h2 { font-family: 'Baloo 2', cursive; font-size: 28px; margin-bottom: 10px; }
+    .state-card p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 400px; margin: 0 auto; }
 
-    .state-card h2 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .state-card p {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    /* spinner */
     .spinner {
       width: 56px; height: 56px;
       border: 5px solid #ececf4;
@@ -126,7 +109,6 @@
     }
     @keyframes spin { to { transform:rotate(360deg); } }
 
-    /* pending retry */
     .retry-bar {
       margin-top: 22px;
       background: #fff8ef;
@@ -147,7 +129,6 @@
       66%  { content: '...'; }
     }
 
-    /* error */
     .state-error h2 { color: var(--red); }
     .btn-back {
       display: inline-flex;
@@ -166,7 +147,7 @@
     }
     .btn-back:hover { transform: translateY(-2px); }
 
-    /* ── ACCESS CARD (état succès avant chat) ────────────── */
+    /* ── ACCESS CARD ─────────────────────────────────────── */
     .access-card {
       background: #fff;
       border-radius: var(--radius);
@@ -187,17 +168,8 @@
       flex-wrap: wrap;
     }
 
-    .access-top h1 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 30px;
-      margin-bottom: 6px;
-    }
-
-    .access-top p {
-      color: rgba(255,255,255,.72);
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .access-top h1 { font-family: 'Baloo 2', cursive; font-size: 30px; margin-bottom: 6px; }
+    .access-top p { color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.6; }
 
     .timer-pill {
       background: rgba(255,255,255,.10);
@@ -209,25 +181,9 @@
       min-width: 148px;
       flex-shrink: 0;
     }
+    .timer-pill .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.60); margin-bottom: 4px; }
+    .timer-pill .countdown { font-family: 'Baloo 2', cursive; font-size: 26px; font-weight: 800; color: var(--orange); letter-spacing: 1px; }
 
-    .timer-pill .label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,.60);
-      margin-bottom: 4px;
-    }
-
-    .timer-pill .countdown {
-      font-family: 'Baloo 2', cursive;
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--orange);
-      letter-spacing: 1px;
-    }
-
-    /* infos strip */
     .access-strip {
       display: flex;
       gap: 0;
@@ -255,17 +211,10 @@
     .strip-icon.blue   { background:#eef5ff; }
     .strip-icon.orange { background:#fff8ef; }
 
-    .strip-item strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 1px;
-    }
-    .strip-item span {
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .strip-item strong { display: block; font-size: 13px; margin-bottom: 1px; }
+    .strip-item span { font-size: 12px; color: var(--muted); }
 
-    /* ── WELCOME SHELL ───────────────────────────────────── */
+    /* ── CHAT SHELL ──────────────────────────────────────── */
     #chat-shell {
       padding: 40px 32px 48px;
       display: flex;
@@ -286,18 +235,8 @@
       50%      { transform: translateY(-10px); }
     }
 
-    .welcome-title {
-      font-family: 'Baloo 2', cursive;
-      font-size: 26px;
-      color: var(--dark);
-    }
-
-    .welcome-sub {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-      max-width: 420px;
-    }
+    .welcome-title { font-family: 'Baloo 2', cursive; font-size: 26px; color: var(--dark); }
+    .welcome-sub { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 420px; }
 
     .welcome-arrow {
       display: flex;
@@ -312,7 +251,8 @@
       border-radius: 999px;
       box-shadow: 0 10px 28px rgba(245,166,35,.28);
       animation: pulse 2s ease-in-out infinite;
-      cursor: default;
+      cursor: pointer;
+      border: none;
     }
     @keyframes pulse {
       0%,100% { box-shadow: 0 10px 28px rgba(245,166,35,.28); }
@@ -336,25 +276,21 @@
       font-weight: 700;
       color: var(--dark);
       white-space: nowrap;
+      cursor: pointer;
+      transition: .15s;
     }
+    .tip-chip:hover { border-color: var(--orange); color: var(--orange); }
 
-    /* ── FOOTER NOTE ─────────────────────────────────────── */
-    .footer-note {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .footer-note { text-align: center; margin-top: 18px; font-size: 13px; color: var(--muted); }
     .footer-note a { color: var(--blue); font-weight: 700; }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 640px) {
       .access-top { padding: 22px 20px; }
       .access-top h1 { font-size: 24px; }
       .access-strip { flex-direction: column; }
       .strip-item { border-right: none; border-bottom: 1px solid #f0f0f5; }
       .strip-item:last-child { border-bottom: none; }
-      #chat-shell { height: calc(100vh - 280px); min-height: 440px; }
+      #chat-shell { padding: 28px 20px 36px; }
       .state-card { padding: 36px 22px; }
     }
   </style>
@@ -370,14 +306,12 @@
 
   <div class="wrap">
 
-    <!-- ÉTAT : chargement -->
     <div class="state-card" id="stateLoading">
       <div class="spinner"></div>
       <h2>Vérification de ton accès…</h2>
       <p>On confirme ton paiement, ça prend quelques secondes.</p>
     </div>
 
-    <!-- ÉTAT : en attente de confirmation Revolut -->
     <div class="state-card" id="statePending" style="display:none">
       <span class="state-icon">⏳</span>
       <h2>Confirmation en cours…</h2>
@@ -385,22 +319,20 @@
       <div class="retry-bar">Nouvelle tentative dans <span id="retryCount">5</span>s <span class="dots"></span></div>
     </div>
 
-    <!-- ÉTAT : erreur -->
     <div class="state-card state-error" id="stateError" style="display:none">
       <span class="state-icon">❌</span>
       <h2>Accès refusé</h2>
-      <p id="errorMsg">Ton accès est invalide ou a expiré. Si tu viens de payer, contacte-nous.</p>
+      <p id="errorMsg">Aucun accès trouvé. Retourne à l'accueil et lance ton diagnostic.</p>
       <a href="/" class="btn-back">← Retour à l'accueil</a>
     </div>
 
-    <!-- ÉTAT : succès + chat -->
     <div id="stateSuccess" style="display:none">
       <div class="access-card">
 
         <div class="access-top">
           <div>
             <h1>🎉 Bienvenue sur IADIY !</h1>
-            <p>Ton assistant vitrage est prêt. Pose toutes tes questions ci-dessous.</p>
+            <p>Ton expert bricolage IA est prêt. Pose toutes tes questions ci-dessous.</p>
           </div>
           <div class="timer-pill">
             <div class="label">Accès expire dans</div>
@@ -417,9 +349,9 @@
             </div>
           </div>
           <div class="strip-item">
-            <div class="strip-icon blue">🤖</div>
+            <div class="strip-icon blue">🔧</div>
             <div>
-              <strong>IA spécialisée vitrage</strong>
+              <strong>Assistant bricolage IA</strong>
               <span>Questions illimitées</span>
             </div>
           </div>
@@ -432,23 +364,23 @@
           </div>
         </div>
 
-        <!-- Écran d'accueil — Botpress s'ouvre en widget flottant en bas à droite -->
         <div id="chat-shell">
           <div class="welcome-emoji">🤖</div>
-          <div class="welcome-title">Ton assistant vitrage est prêt !</div>
+          <div class="welcome-title">Ton expert bricolage est prêt !</div>
           <p class="welcome-sub">
-            Clique sur le bouton en bas à droite pour démarrer la conversation.
-            Pose toutes tes questions sur la vitrerie, les miroirs, pare-douche, fenêtres…
+            Clique sur le bouton ci-dessous ou en bas à droite pour démarrer.
+            Décris ton problème, envoie une photo — IADIY te guide pas à pas.
           </p>
-          <div class="welcome-arrow">
-            Clique en bas à droite 👇
-          </div>
+          <button class="welcome-arrow" onclick="openChat()">
+            Démarrer la conversation 💬
+          </button>
           <div class="welcome-tips">
-            <div class="tip-chip">🪟 Remplacement de vitre</div>
-            <div class="tip-chip">🛁 Pare-douche</div>
-            <div class="tip-chip">🪞 Miroir sur mesure</div>
-            <div class="tip-chip">🔧 Quel vitrage choisir ?</div>
-            <div class="tip-chip">💰 Estimation budget</div>
+            <div class="tip-chip" onclick="openChat()">🚰 Fuite / plomberie</div>
+            <div class="tip-chip" onclick="openChat()">⚡ Panne électrique</div>
+            <div class="tip-chip" onclick="openChat()">🧱 Fissure dans un mur</div>
+            <div class="tip-chip" onclick="openChat()">🪟 Problème de fenêtre</div>
+            <div class="tip-chip" onclick="openChat()">🔧 Réparer moi-même</div>
+            <div class="tip-chip" onclick="openChat()">💰 Éviter un artisan</div>
           </div>
         </div>
 
@@ -462,16 +394,11 @@
   </div>
 
   <script>
-    // ─── CONFIG ───────────────────────────────────────────────────────────────
-    // En prod, API_BASE = '' (même domaine). En local, mettre 'http://localhost:3000'
     const API_BASE = 'https://iadiy-production.up.railway.app'
-
-    // ─── PARAMS ───────────────────────────────────────────────────────────────
     const params   = new URLSearchParams(window.location.search)
     const token    = params.get('token')
     const orderRef = params.get('order_ref')
 
-    // ─── UI HELPERS ──────────────────────────────────────────────────────────
     function show(id)  { document.getElementById(id).style.display = '' }
     function hide(id)  { document.getElementById(id).style.display = 'none' }
     function hideAll() {
@@ -484,40 +411,50 @@
       show('stateError')
     }
 
-    // ─── COUNTDOWN ───────────────────────────────────────────────────────────
     function startCountdown(expiresAt) {
       const end = new Date(expiresAt).getTime()
       const el  = document.getElementById('countdown')
-
       function tick() {
         const diff = end - Date.now()
         if (diff <= 0) { el.textContent = '00:00:00'; return; }
-        const h  = Math.floor(diff / 3600000)
-        const m  = Math.floor((diff % 3600000) / 60000)
-        const s  = Math.floor((diff % 60000) / 1000)
+        const h = Math.floor(diff / 3600000)
+        const m = Math.floor((diff % 3600000) / 60000)
+        const s = Math.floor((diff % 60000) / 1000)
         el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
       }
       tick()
       setInterval(tick, 1000)
-
-      // label "Expire le JJ/MM à HH:MM"
       const d = new Date(expiresAt)
       document.getElementById('expiresLabel').textContent =
         d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'}) + ' à ' +
         d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
     }
 
-    // ─── BOTPRESS INJECTION ──────────────────────────────────────────────────
+    // Ouvre le chat Botpress
+    function openChat() {
+      if (window.botpress && window.botpress.open) {
+        window.botpress.open()
+      } else {
+        // Si botpress pas encore chargé, on attend
+        setTimeout(openChat, 500)
+      }
+    }
+
     function loadBotpress(accessToken) {
-      // Évite de charger deux fois si l'user refresh via sessionStorage
       if (window.__bpLoaded) return
       window.__bpLoaded = true
 
-      // Script principal Botpress v3.6
       const s1 = document.createElement('script')
       s1.src = 'https://cdn.botpress.cloud/webchat/v3.6/inject.js'
+      s1.onload = function() {
+        // Une fois Botpress chargé, on ouvre automatiquement le chat après 1 seconde
+        setTimeout(function() {
+          if (window.botpress && window.botpress.open) {
+            window.botpress.open()
+          }
+        }, 1500)
+      }
 
-      // Script de config spécifique au bot (chargé après inject.js)
       const s2 = document.createElement('script')
       s2.src = 'https://files.bpcontent.cloud/2026/04/12/15/20260412152259-AS5AW7DG.js'
       s2.defer = true
@@ -526,7 +463,6 @@
       document.head.appendChild(s2)
     }
 
-    // ─── FLOW PRINCIPAL ───────────────────────────────────────────────────────
     async function verifyWithToken(tok) {
       const res  = await fetch(`${API_BASE}/api/verify-access?token=${encodeURIComponent(tok)}`)
       const data = await res.json()
@@ -537,18 +473,13 @@
     async function resolveOrder(ref, attempt = 0) {
       const res  = await fetch(`${API_BASE}/api/resolve-order?order_ref=${encodeURIComponent(ref)}`)
       const data = await res.json()
-
-      // Paiement confirmé → on a le token
       if (res.ok && data.ok && data.token) return data
-
-      // Webhook pas encore arrivé → on retente jusqu'à 10x (toutes les 5s)
       if (res.status === 202 && attempt < 10) {
         hideAll()
         show('statePending')
         await countdown(5)
         return resolveOrder(ref, attempt + 1)
       }
-
       throw new Error(data.error || 'Paiement non confirmé. Contacte le support.')
     }
 
@@ -568,45 +499,35 @@
     async function start() {
       try {
         let accessData
-
         if (token) {
-          // Accès direct par token (ex. lien reçu par mail)
           accessData = await verifyWithToken(token)
-          // verify-access ne retourne pas le token, on le prend de l'URL
           accessData.token = token
         } else if (orderRef) {
-          // Redirection post-paiement Revolut
           accessData = await resolveOrder(orderRef)
         } else {
           throw new Error('Aucun accès trouvé. Retourne à l\'accueil et lance ton diagnostic.')
         }
 
-        // ✅ Accès valide → afficher le chat
         hideAll()
         show('stateSuccess')
         show('navBadge')
-
         startCountdown(accessData.expiresAt)
         loadBotpress(accessData.token)
 
-        // Stocker le token en sessionStorage pour éviter de re-vérifier si l'user refresh
         if (accessData.token) {
           sessionStorage.setItem('iadiy_token', accessData.token)
           sessionStorage.setItem('iadiy_expires', accessData.expiresAt)
         }
-
       } catch (err) {
         console.error(err)
         showError(err.message)
       }
     }
 
-    // Si un token est déjà en session, on l'utilise directement
     const sessionToken   = sessionStorage.getItem('iadiy_token')
     const sessionExpires = sessionStorage.getItem('iadiy_expires')
 
     if (sessionToken && sessionExpires && new Date(sessionExpires) > new Date()) {
-      // Ré-affichage rapide sans appel réseau
       hideAll()
       show('stateSuccess')
       show('navBadge')
