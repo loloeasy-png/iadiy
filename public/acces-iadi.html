@@ -430,12 +430,17 @@
         d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
     }
 
-    // Ouvre le chat Botpress
+    // Ouvre le chat Botpress et déclenche le flow
     function openChat() {
-      if (window.botpress && window.botpress.open) {
+      if (window.botpress) {
         window.botpress.open()
+        // Envoie un message vide pour déclencher le flow d'accueil
+        setTimeout(function() {
+          if (window.botpress && window.botpress.sendEvent) {
+            window.botpress.sendEvent({ type: 'trigger', channel: 'web' })
+          }
+        }, 800)
       } else {
-        // Si botpress pas encore chargé, on attend
         setTimeout(openChat, 500)
       }
     }
@@ -446,14 +451,6 @@
 
       const s1 = document.createElement('script')
       s1.src = 'https://cdn.botpress.cloud/webchat/v3.6/inject.js'
-      s1.onload = function() {
-        // Une fois Botpress chargé, on ouvre automatiquement le chat après 1 seconde
-        setTimeout(function() {
-          if (window.botpress && window.botpress.open) {
-            window.botpress.open()
-          }
-        }, 1500)
-      }
 
       const s2 = document.createElement('script')
       s2.src = 'https://files.bpcontent.cloud/2026/04/12/15/20260412152259-AS5AW7DG.js'
