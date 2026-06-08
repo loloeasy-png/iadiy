@@ -89,7 +89,7 @@ function createAccess(db, internalRef) {
     token: uid(24),
     status: 'active',
     createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+    expiresAt: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
   }
 
   db.accesses.push(access)
