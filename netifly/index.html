@@ -588,100 +588,6 @@
     }
     .btn-exit-no:hover { color:var(--gray-600); }
 
-    /* ── REASSURANCE BANNER ── */
-    .reassurance {
-      background:var(--navy);
-      padding:28px 0;
-    }
-    .reassurance-inner {
-      display:flex; align-items:center; justify-content:center;
-      gap:48px; flex-wrap:wrap;
-    }
-    .reassurance-item {
-      display:flex; align-items:center; gap:10px;
-      font-size:14px; font-weight:600; color:rgba(255,255,255,.8);
-    }
-    .reassurance-icon {
-      width:36px; height:36px; border-radius:50%;
-      background:rgba(245,184,0,.15);
-      display:flex; align-items:center; justify-content:center;
-      font-size:16px; flex-shrink:0;
-    }
-
-    /* ── WELCOME POPUP ── */
-    .welcome-overlay {
-      position:fixed; inset:0; z-index:2000;
-      background:rgba(7,15,35,.6);
-      backdrop-filter:blur(4px);
-      display:flex; align-items:center; justify-content:center;
-      opacity:0; pointer-events:none;
-      transition:opacity .3s ease;
-    }
-    .welcome-overlay.show { opacity:1; pointer-events:auto; }
-    .welcome-popup {
-      background:var(--white);
-      border-radius:24px;
-      padding:40px 36px;
-      max-width:420px; width:calc(100% - 48px);
-      text-align:center;
-      box-shadow:0 32px 80px rgba(0,0,0,.3);
-      transform:translateY(20px) scale(.97);
-      transition:transform .3s ease;
-      position:relative;
-    }
-    .welcome-overlay.show .welcome-popup { transform:translateY(0) scale(1); }
-    .welcome-popup-close {
-      position:absolute; top:14px; right:16px;
-      background:none; border:none; font-size:20px;
-      color:var(--gray-400); cursor:pointer;
-    }
-    .welcome-popup-badge {
-      display:inline-block;
-      background:linear-gradient(135deg, #ef4444, #dc2626);
-      color:white; font-size:12px; font-weight:800;
-      padding:4px 12px; border-radius:999px;
-      margin-bottom:16px; letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-    .welcome-popup h3 {
-      font-family:'Outfit', sans-serif;
-      font-weight:900; font-size:24px;
-      color:var(--navy); margin-bottom:10px;
-      letter-spacing:-.03em;
-    }
-    .welcome-popup-sub {
-      font-size:15px; color:var(--gray-600);
-      line-height:1.6; margin-bottom:20px;
-    }
-    .welcome-popup-price {
-      display:flex; align-items:center; justify-content:center;
-      gap:12px; margin-bottom:24px;
-    }
-    .welcome-popup-old {
-      font-size:20px; color:var(--gray-400);
-      text-decoration:line-through; font-weight:600;
-    }
-    .welcome-popup-new {
-      font-family:'Outfit', sans-serif;
-      font-size:42px; font-weight:900;
-      color:var(--navy); letter-spacing:-.04em; line-height:1;
-    }
-    .welcome-popup-new sup { font-size:20px; vertical-align:super; }
-    .btn-welcome {
-      display:block; width:100%;
-      background:var(--accent); color:var(--navy);
-      font-family:'Outfit', sans-serif; font-weight:900; font-size:17px;
-      border:0; border-radius:var(--radius-md);
-      padding:18px 24px; cursor:pointer; margin-bottom:10px;
-      transition:background .15s, transform .12s;
-    }
-    .btn-welcome:hover { background:var(--accent-dark); transform:translateY(-1px); }
-    .btn-welcome-no {
-      background:none; border:none; font-size:12px;
-      color:var(--gray-400); cursor:pointer; padding:6px;
-      font-family:'Outfit', sans-serif;
-    }
-
     /* ── PARTNERS ── */
     .partners { padding:48px 0; background:var(--off); border-top:1px solid var(--gray-100); }
     .partners-label {
@@ -766,6 +672,40 @@
     .btn-buy:hover { background:#1a3460; transform:translateY(-1px); }
     .price-guarantee { margin-top:14px; font-size:13px; color:var(--gray-400); font-weight:400; }
 
+    /* ── REASSURANCE ── */
+    .reassurance { background:var(--navy); padding:28px 0; }
+    .reassurance-inner { display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; }
+    .reassurance-item { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:rgba(255,255,255,.8); }
+    .reassurance-icon { font-size:20px; }
+
+    /* ── WELCOME POPUP ── */
+    .welcome-overlay {
+      position:fixed; inset:0; z-index:2000;
+      background:rgba(7,15,35,.65); backdrop-filter:blur(4px);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .welcome-overlay.show { opacity:1; pointer-events:auto; }
+    .welcome-popup {
+      background:var(--white); border-radius:24px;
+      padding:40px 36px; max-width:420px; width:calc(100% - 48px);
+      text-align:center; box-shadow:0 32px 80px rgba(0,0,0,.3);
+      transform:translateY(20px) scale(.97); transition:transform .3s;
+      position:relative;
+    }
+    .welcome-overlay.show .welcome-popup { transform:translateY(0) scale(1); }
+    .welcome-popup-close { position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; color:var(--gray-400); cursor:pointer; }
+    .welcome-badge { display:inline-block; background:#ef4444; color:#fff; font-size:12px; font-weight:800; padding:4px 12px; border-radius:999px; margin-bottom:14px; text-transform:uppercase; letter-spacing:.05em; }
+    .welcome-popup h3 { font-family:'Outfit', sans-serif; font-weight:900; font-size:24px; color:var(--navy); margin-bottom:10px; letter-spacing:-.03em; }
+    .welcome-popup-sub { font-size:15px; color:var(--gray-600); line-height:1.6; margin-bottom:20px; }
+    .welcome-price { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:24px; }
+    .welcome-old { font-size:20px; color:var(--gray-400); text-decoration:line-through; font-weight:600; }
+    .welcome-new { font-family:'Outfit', sans-serif; font-size:48px; font-weight:900; color:var(--navy); letter-spacing:-.04em; line-height:1; }
+    .welcome-new sup { font-size:22px; vertical-align:super; }
+    .btn-welcome { display:block; width:100%; background:var(--accent); color:var(--navy); font-family:'Outfit', sans-serif; font-weight:900; font-size:17px; border:0; border-radius:var(--radius-md); padding:18px 24px; cursor:pointer; margin-bottom:10px; transition:background .15s; }
+    .btn-welcome:hover { background:var(--accent-dark); }
+    .btn-welcome-no { background:none; border:none; font-size:12px; color:var(--gray-400); cursor:pointer; padding:6px; font-family:'Outfit', sans-serif; }
+
     /* ── FOOTER ── */
     footer { background:var(--navy); padding:30px 0; }
     .footer-inner {
@@ -779,15 +719,7 @@
     .footer-copy { font-size:12px; color:rgba(255,255,255,.25); }
 
     /* ── RESPONSIVE ── */
-    .video-wrap {
-      max-width:500px; margin:0 auto;
-      border-radius:20px; overflow:hidden;
-      box-shadow:var(--shadow-lg);
-      border:1px solid var(--gray-100);
-    }
-    @media (max-width:600px) {
-      .video-wrap { max-width:100%; border-radius:0; border-left:none; border-right:none; }
-    }
+    @media (max-width:900px) {
       .hero-inner { grid-template-columns:1fr; }
       .hero-photo { display:none; }
       .hero-content { padding:60px 24px !important; }
@@ -843,7 +775,7 @@
           <h1>Avant d'appeler<br>un artisan,<br>demande à <span class="hl">IADIY</span></h1>
           <p class="hero-lead">Fuite, panne, fissure, installation… Décris ton problème et reçois un diagnostic clair en 2 minutes. Tu sais exactement quoi faire — et combien ça va coûter.</p>
           <div class="hero-cta-row">
-            <button class="btn-primary" onclick="document.getElementById('tarif').scrollIntoView({behavior:'smooth'})">
+            <button class="btn-primary" onclick="payerMaintenant(this)">
               Je règle mon problème 5&nbsp;€ &nbsp;→
             </button>
             <span class="hero-note">Accès illimité 48h · Instantané</span>
@@ -901,12 +833,8 @@
         <h2>Vois IADIY en action</h2>
         <p class="section-sub">Un vrai problème, une vraie réponse — en moins d'une minute.</p>
       </div>
-      <div class="video-wrap">
-        <video
-          controls
-          playsinline
-          style="width:100%; display:block; background:#000;"
-          poster="">
+      <div style="max-width:800px; margin:0 auto; border-radius:20px; overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--gray-100);">
+        <video controls playsinline style="width:100%; display:block; background:#000;">
           <source src="videotest.mp4" type="video/mp4" />
           Votre navigateur ne supporte pas la lecture vidéo.
         </video>
@@ -1205,54 +1133,6 @@
 
 </main>
 
-  <!-- REASSURANCE BANNER -->
-  <section class="reassurance">
-    <div class="wrap">
-      <div class="reassurance-inner">
-        <div class="reassurance-item">
-          <div class="reassurance-icon">🔒</div>
-          Paiement 100% sécurisé
-        </div>
-        <div class="reassurance-item">
-          <div class="reassurance-icon">⚡</div>
-          Accès instantané après paiement
-        </div>
-        <div class="reassurance-item">
-          <div class="reassurance-icon">🛡️</div>
-          Satisfait ou on te répond
-        </div>
-        <div class="reassurance-item">
-          <div class="reassurance-icon">🇫🇷</div>
-          Service 100% en français
-        </div>
-        <div class="reassurance-item">
-          <div class="reassurance-icon">⏱️</div>
-          Accès 48h illimité
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WELCOME POPUP -->
-  <div class="welcome-overlay" id="welcomeOverlay">
-    <div class="welcome-popup">
-      <button class="welcome-popup-close" onclick="closeWelcome()">✕</button>
-      <div class="welcome-popup-badge">🎁 Offre de lancement</div>
-      <h3>Bienvenue sur IADIY !</h3>
-      <p class="welcome-popup-sub">Sois parmi les premiers à découvrir le 1er assistant bricolage IA en France.</p>
-      <div class="welcome-popup-price">
-        <span class="welcome-popup-old">9,90€</span>
-        <span class="welcome-popup-new"><sup>€</sup>5</span>
-      </div>
-      <button class="btn-welcome" onclick="closeWelcome(); payerMaintenant(this)">
-        Je profite de l'offre → 5€
-      </button>
-      <button class="btn-welcome-no" onclick="closeWelcome()">
-        Non merci, je préfère payer un artisan
-      </button>
-    </div>
-  </div>
-
   <!-- PARTNERS -->
   <section class="partners">
     <div class="wrap">
@@ -1316,6 +1196,35 @@
     </div>
   </section>
 
+  <!-- REASSURANCE -->
+  <section class="reassurance">
+    <div class="wrap">
+      <div class="reassurance-inner">
+        <div class="reassurance-item"><span class="reassurance-icon">🔒</span>Paiement 100% sécurisé</div>
+        <div class="reassurance-item"><span class="reassurance-icon">⚡</span>Accès instantané</div>
+        <div class="reassurance-item"><span class="reassurance-icon">🛡️</span>Satisfait ou on te répond</div>
+        <div class="reassurance-item"><span class="reassurance-icon">🇫🇷</span>100% en français</div>
+        <div class="reassurance-item"><span class="reassurance-icon">⏱️</span>Accès 48h illimité</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WELCOME POPUP -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-popup">
+      <button class="welcome-popup-close" onclick="closeWelcome()">✕</button>
+      <div class="welcome-badge">🎁 Offre de lancement</div>
+      <h3>Bienvenue sur IADIY !</h3>
+      <p class="welcome-popup-sub">Sois parmi les premiers à tester le 1er assistant bricolage IA en France.</p>
+      <div class="welcome-price">
+        <span class="welcome-old">9,90€</span>
+        <span class="welcome-new"><sup>€</sup>5</span>
+      </div>
+      <button class="btn-welcome" onclick="closeWelcome(); payerMaintenant(this)">Je profite de l'offre 5€ →</button>
+      <button class="btn-welcome-no" onclick="closeWelcome()">Non merci, je préfère payer un artisan</button>
+    </div>
+  </div>
+
 <footer>
   <div class="wrap">
     <div class="footer-inner">
@@ -1371,20 +1280,6 @@
 
 <script>
   const API_BASE = 'https://iadiy-production.up.railway.app'
-
-  // Welcome popup — s'affiche une seule fois après 5 secondes
-  function closeWelcome() {
-    document.getElementById('welcomeOverlay').classList.remove('show')
-    localStorage.setItem('iadiy_welcome_shown', '1')
-  }
-  if (!localStorage.getItem('iadiy_welcome_shown')) {
-    setTimeout(function() {
-      document.getElementById('welcomeOverlay').classList.add('show')
-    }, 5000)
-  }
-  document.getElementById('welcomeOverlay').addEventListener('click', function(e) {
-    if (e.target === e.currentTarget) closeWelcome()
-  })
 
   // Exit intent
   let exitShown = false
@@ -1471,7 +1366,20 @@
     const el = document.getElementById('ctr-questions')
     if (el) animateCounter(el, 4837, 1200)
   })
-  async function payerMaintenant(btn) {
+  // Welcome popup — une seule fois après 5 secondes
+  function closeWelcome() {
+    document.getElementById('welcomeOverlay').classList.remove('show')
+    localStorage.setItem('iadiy_welcome_shown', '1')
+  }
+  document.getElementById('welcomeOverlay').addEventListener('click', function(e) {
+    if (e.target === e.currentTarget) closeWelcome()
+  })
+  if (!localStorage.getItem('iadiy_welcome_shown')) {
+    setTimeout(function() {
+      document.getElementById('welcomeOverlay').classList.add('show')
+    }, 5000)
+  }
+
     const orig = btn.textContent
     btn.textContent = 'Chargement...'
     btn.disabled = true
