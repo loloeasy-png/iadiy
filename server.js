@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
+import nodemailer from 'nodemailer'
 
 dotenv.config()
 
@@ -167,6 +168,104 @@ app.post('/api/webhook', express.raw({ type: '*/*' }), async (req, res) => {
 
 // express.json() pour toutes les autres routes
 app.use(express.json())
+// ─── IDENTIFICATION (email + code à usage unique) ─────────────────────────────
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 587),
+  secure: Number(process.env.SMTP_PORT) === 465,
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+})
+
+function ensureAuthTables(db) {
+  if (!db.utilisateurs) db.utilisateurs = []
+  if (!db.codesVerification) db.codesVerification = []
+  if (!db.sessions) db.sessions = []
+  return db
+}
+
+function generateCode() {
+  return String(Math.floor(100000 + Math.random() * 900000))
+}
+
+app.post('/api/request-code', async (req, res) => {
+  const contact = String(req.body?.contact || '').trim().toLowerCase()
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) {
+    return res.status(400).json({ error: 'Adresse email invalide' })
+  }
+
+  const db = ensureAuthTables(loadDb())
+
+  const recent = db.codesVerification
+    .filter(c => c.contact === contact)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
+  if (recent && (Date.now() - new Date(recent.createdAt).getTime()) < 60 * 1000) {
+    return res.status(429).json({ error: 'Merci de patienter avant de redemander un code' })
+  }
+
+  const code = generateCode()
+  db.codesVerification.push({
+    contact, code, utilise: false, tentatives: 0,
+    createdAt: new Date().toISOString(),
+    expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString()
+  })
+  saveDb(db)
+
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || 'IADIY <no-reply@iadiy.fr>',
+      to: contact,
+      subject: `Votre code de connexion IADIY : ${code}`,
+      text: `Votre code est ${code}. Il expire dans 10 minutes.`
+    })
+  } catch (err) {
+    console.error('Erreur envoi email :', err)
+    return res.status(500).json({ error: "Impossible d'envoyer l'email" })
+  }
+
+  return res.json({ ok: true })
+})
+
+app.post('/api/verify-code', (req, res) => {
+  const contact = String(req.body?.contact || '').trim().toLowerCase()
+  const code = String(req.body?.code || '').trim()
+  if (!contact || !/^\d{6}$/.test(code)) {
+    return res.status(400).json({ error: 'Requête invalide' })
+  }
+
+  const db = ensureAuthTables(loadDb())
+  const entry = db.codesVerification
+    .filter(c => c.contact === contact && !c.utilise)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
+
+  if (!entry) return res.status(400).json({ error: 'Aucun code en attente' })
+  if (new Date(entry.expiresAt) < new Date()) return res.status(400).json({ error: 'Code expiré' })
+  if (entry.tentatives >= 5) return res.status(429).json({ error: 'Trop de tentatives' })
+
+  if (entry.code !== code) {
+    entry.tentatives += 1
+    saveDb(db)
+    return res.status(400).json({ error: 'Code incorrect' })
+  }
+
+  entry.utilise = true
+
+  let user = db.utilisateurs.find(u => u.contact === contact)
+  if (!user) {
+    user = { id: uid(8), contact, createdAt: new Date().toISOString() }
+    db.utilisateurs.push(user)
+  }
+
+  const session = {
+    token: uid(24), userId: user.id,
+    createdAt: new Date().toISOString(),
+    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+  }
+  db.sessions.push(session)
+  saveDb(db)
+
+  return res.json({ ok: true, token: session.token, user: { id: user.id, contact: user.contact } })
+})
 
 // ─── ROUTES ───────────────────────────────────────────────────────────────────
 
